@@ -17,8 +17,8 @@ public class TestConnectionPool implements ConnectionPool {
         try {
             return DriverManager.getConnection("jdbc:mysql://" + SERVER + "/" + DATABASE + OPTION, USERNAME, PASSWORD);
         } catch (SQLException e) {
-            System.err.println("DB 연결 오류:" + e.getMessage());
-            e.printStackTrace();
+            System.out.println("연결 오류:" + e.getMessage());
+            System.out.println("DB 연결을 확인해주세요.");
             return null;
         }
     }
