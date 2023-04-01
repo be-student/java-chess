@@ -1,13 +1,12 @@
 package chess.controller.main;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface Request {
+public interface Request<T> {
 
     ActionType getActionType();
 
-    List<String> commands();
+    T getData(Class<T> clazz);
 
     Optional<Integer> getBoardId();
 

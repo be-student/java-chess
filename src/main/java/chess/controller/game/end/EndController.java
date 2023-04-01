@@ -14,7 +14,6 @@ public class EndController implements Controller {
 
     @Override
     public void run(Request request) {
-        EndRequest endRequest = EndRequest.from(request);
-        endChessGameService.end(endRequest.getBoardId());
+        endChessGameService.end(request.getBoardId().get());
     }
 }

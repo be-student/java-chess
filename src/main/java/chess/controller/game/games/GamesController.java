@@ -16,7 +16,6 @@ public class GamesController implements Controller {
 
     @Override
     public void run(Request request) {
-        GamesRequest gamesRequest = GamesRequest.from(request);
-        gamesOutput.printGames(gamesService.findAllGamesByUserId(gamesRequest.getUserId()));
+        gamesOutput.printGames(gamesService.findAllGamesByUserId(request.getUserId().get()));
     }
 }

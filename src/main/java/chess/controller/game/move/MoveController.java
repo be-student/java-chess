@@ -28,19 +28,14 @@ public class MoveController implements Controller {
 
     @Override
     public void run(Request request) {
-        MoveRequest moveRequest = MoveRequest.from(request);
-        moveChessGameService.move(moveRequest.getBoardId(), moveRequest.getOrigin(), moveRequest.getDestination());
-        Optional<ChessGame> chessGame = loadChessGameService.load(moveRequest.getBoardId());
+        MoveRequest moveRequest = request.getData(MoveRequest.class);
+        moveChessGameService.move(request.getBoardId().get(), moveRequest.getOrigin(), moveRequest.getDestination());
+        Optional<ChessGame> chessGame = loadChessGameService.load(request.getBoardId().get());
         if (chessGame.isEmpty()) {
             throw new BoardNotFoundException();
         }
-        printBoard(chessGame.get());
+        boardOutput.printBoard(makeBoardResponse(chessGame.get().getPieces()));
     }
-
-    private void printBoard(ChessGame chessGame) {
-        boardOutput.printBoard(makeBoardResponse(chessGame.getPieces()));
-    }
-
 
     private List<List<PieceResponse>> makeBoardResponse(List<List<Piece>> boardResult) {
         return boardResult.stream()

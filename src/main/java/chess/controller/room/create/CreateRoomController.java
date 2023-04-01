@@ -16,8 +16,7 @@ public class CreateRoomController implements Controller {
 
     @Override
     public void run(Request request) {
-        CreateRoomRequest createRoomRequest = CreateRoomRequest.from(request);
-        int roomId = createRoomService.createRoom(createRoomRequest.getUserId());
+        int roomId = createRoomService.createRoom(request.getUserId().get());
         createRoomOutput.printCreateRoomSuccess(roomId);
     }
 }

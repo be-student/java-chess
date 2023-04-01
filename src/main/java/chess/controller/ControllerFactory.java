@@ -31,9 +31,11 @@ public class ControllerFactory {
 
     private ControllerFactory() {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        startController = new StartController(serviceFactory.getStartChessGameService());
-        endController = new EndController(serviceFactory.getEndChessGameService());
         ViewFactory viewFactory = ViewFactory.getInstance();
+        startController = new StartController(serviceFactory.getStartChessGameService(),
+                serviceFactory.getLoadChessGameService(),
+                viewFactory.getBoardOutput());
+        endController = new EndController(serviceFactory.getEndChessGameService());
         moveController = new MoveController(serviceFactory.getMoveChessGameService(),
                 serviceFactory.getLoadChessGameService(), viewFactory.getBoardOutput());
         statusController = new StatusController(viewFactory.getStatusOutput(),

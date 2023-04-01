@@ -22,6 +22,6 @@ public class InputView implements Input {
     @Override
     public Request inputGameCommand() {
         List<String> commands = Arrays.asList(scanner.nextLine().split(" "));
-        return new RequestImpl(commands, loginImpl.getUserId(), joinBoard.getBoardId());
+        return RequestImpl.of(commands, loginImpl.getUserId(), joinBoard.getBoardId());
     }
 }

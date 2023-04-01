@@ -29,9 +29,9 @@ public class JoinBoardController implements Controller {
 
     @Override
     public void run(Request request) {
-        JoinBoardRequest joinBoardRequest = JoinBoardRequest.from(request);
-        joinBoard.join(joinBoardRequest.getRoomId());
-        Optional<ChessGame> chessGame = loadChessGameService.load(joinBoardRequest.getRoomId());
+        JoinBoardRequest joinBoardRequest = request.getData(JoinBoardRequest.class);
+        joinBoard.join(joinBoardRequest.getBoardId());
+        Optional<ChessGame> chessGame = loadChessGameService.load(joinBoardRequest.getBoardId());
         if (chessGame.isEmpty()) {
             throw new BoardNotFoundException();
         }

@@ -16,8 +16,7 @@ public class StatusController implements Controller {
 
     @Override
     public void run(Request request) {
-        StatusRequest statusRequest = StatusRequest.from(request);
-        StatusResponse statusResponse = statusChessGameService.status(statusRequest.getBoardId());
+        StatusResponse statusResponse = statusChessGameService.status(request.getBoardId().get());
         statusOutput.printStatus(statusResponse);
     }
 }
