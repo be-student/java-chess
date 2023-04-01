@@ -1,6 +1,8 @@
 package chess.controller.game.move;
 
-public interface MoveRequest {
+import chess.controller.main.RequestData;
+
+public interface MoveRequest extends RequestData {
 
     String getOrigin();
 

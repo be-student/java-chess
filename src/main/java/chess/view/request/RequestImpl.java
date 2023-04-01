@@ -2,21 +2,22 @@ package chess.view.request;
 
 import chess.controller.main.ActionType;
 import chess.controller.main.Request;
+import chess.controller.main.RequestData;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class RequestImpl<T> implements Request<T> {
+public class RequestImpl<R extends RequestData> implements Request {
 
     private static final int ACTION_TYPE_INDEX = 0;
     private final ActionType actionType;
-    private final Map<Class<T>, T> data;
+    private final Map<Class<R>, R> data;
     private final Optional<Integer> boardId;
     private final Optional<Integer> userId;
 
     private RequestImpl(
             ActionType actionType,
-            Map<Class<T>, T> data,
+            Map<Class<R>, R> data,
             Optional<Integer> userId,
             Optional<Integer> boardId) {
         this.actionType = actionType;
@@ -25,7 +26,7 @@ public class RequestImpl<T> implements Request<T> {
         this.boardId = boardId;
     }
 
-    public static <T> RequestImpl<T> of(
+    public static <T extends RequestData> RequestImpl<T> of(
             List<String> commands,
             Optional<Integer> userId,
             Optional<Integer> boardId) {
@@ -40,8 +41,10 @@ public class RequestImpl<T> implements Request<T> {
     }
 
     @Override
-    public T getData(Class<T> clazz) {
-        return data.get(clazz);
+    public <T extends RequestData> T getData(Class<T> clazz) {
+        @SuppressWarnings("unchecked")
+        T r = (T) data.get(clazz);
+        return r;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package chess.controller.room.create;
 
-public interface CreateRoomRequest {
+import chess.controller.main.RequestData;
+
+public interface CreateRoomRequest extends RequestData {
 
 }

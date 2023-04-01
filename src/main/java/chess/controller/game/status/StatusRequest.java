@@ -1,5 +1,7 @@
 package chess.controller.game.status;
 
-public interface StatusRequest {
+import chess.controller.main.RequestData;
+
+public interface StatusRequest extends RequestData {
 
 }

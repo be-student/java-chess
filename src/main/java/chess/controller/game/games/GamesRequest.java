@@ -1,5 +1,7 @@
 package chess.controller.game.games;
 
-public interface GamesRequest {
+import chess.controller.main.RequestData;
+
+public interface GamesRequest extends RequestData {
 
 }

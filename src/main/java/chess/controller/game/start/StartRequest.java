@@ -1,5 +1,7 @@
 package chess.controller.game.start;
 
-public interface StartRequest {
+import chess.controller.main.RequestData;
+
+public interface StartRequest extends RequestData {
 
 }

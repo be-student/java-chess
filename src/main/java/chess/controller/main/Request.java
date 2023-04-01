@@ -2,11 +2,11 @@ package chess.controller.main;
 
 import java.util.Optional;
 
-public interface Request<T> {
+public interface Request {
 
     ActionType getActionType();
 
-    T getData(Class<T> clazz);
+    <T extends RequestData> T getData(Class<T> clazz);
 
     Optional<Integer> getBoardId();
 

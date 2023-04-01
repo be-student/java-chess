@@ -1,5 +1,7 @@
 package chess.controller.game.end;
 
-public interface EndRequest {
+import chess.controller.main.RequestData;
+
+public interface EndRequest extends RequestData {
 
 }

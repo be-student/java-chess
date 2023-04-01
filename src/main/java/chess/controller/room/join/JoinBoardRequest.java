@@ -1,6 +1,8 @@
 package chess.controller.room.join;
 
-public interface JoinBoardRequest {
+import chess.controller.main.RequestData;
+
+public interface JoinBoardRequest extends RequestData {
 
     int getBoardId();
 }
