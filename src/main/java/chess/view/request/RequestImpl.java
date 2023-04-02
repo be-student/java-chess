@@ -43,8 +43,8 @@ public class RequestImpl<R extends RequestData> implements Request {
     @Override
     public <T extends RequestData> T getData(Class<T> clazz) {
         @SuppressWarnings("unchecked")
-        T r = (T) data.get(clazz);
-        return r;
+        T t = (T) data.get(clazz);
+        return t;
     }
 
     @Override
