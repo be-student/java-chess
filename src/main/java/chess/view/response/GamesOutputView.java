@@ -1,4 +1,4 @@
-package chess.view.resposne;
+package chess.view.response;
 
 import chess.controller.game.games.GamesOutput;
 import java.util.List;

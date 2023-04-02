@@ -7,7 +7,7 @@ import chess.controller.main.Request;
 import chess.domain.game.ChessGame;
 import chess.domain.piece.Piece;
 import chess.service.game.LoadChessGameService;
-import chess.view.resposne.PieceResponse;
+import chess.view.response.PieceResponse;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

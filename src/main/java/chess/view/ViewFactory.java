@@ -10,19 +10,19 @@ import chess.controller.room.join.JoinBoard;
 import chess.controller.room.join.JoinBoardOutput;
 import chess.controller.user.Login;
 import chess.controller.user.LoginOutput;
-import chess.view.resposne.BoardOutputView;
-import chess.view.resposne.CreateRoomOutputView;
-import chess.view.resposne.ErrorOutputView;
-import chess.view.resposne.GamesOutputView;
-import chess.view.resposne.InitialOutputView;
-import chess.view.resposne.JoinBoardOutputView;
-import chess.view.resposne.LoginOutputView;
-import chess.view.resposne.StatusOutputView;
+import chess.view.response.BoardOutputView;
+import chess.view.response.CreateRoomOutputView;
+import chess.view.response.ErrorOutputView;
+import chess.view.response.GamesOutputView;
+import chess.view.response.InitialOutputView;
+import chess.view.response.JoinBoardOutputView;
+import chess.view.response.LoginOutputView;
+import chess.view.response.StatusOutputView;
 
 public class ViewFactory {
 
     private static final ViewFactory instance = new ViewFactory();
-    
+
     private final LoginImpl login;
     private final JoinBoardImpl joinBoard;
     private final InputView inputView;
