@@ -17,7 +17,7 @@ public class LoginRequestImpl implements LoginRequest {
 
     private void validateCommands(List<String> commands) {
         if (commands.size() != LoginRequestImpl.USERNAME_COMMAND_SIZE) {
-            throw new IllegalArgumentException("잘못된 명령어입니다.");
+            throw new IllegalArgumentException("잘못된 입력입니다. login [유저 이름]을 입력해주세요. ex) login Hyeon9mak");
         }
     }
 

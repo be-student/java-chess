@@ -2,6 +2,7 @@ package chess.view.request;
 
 import chess.controller.game.move.MoveRequest;
 import chess.controller.main.ActionType;
+import chess.controller.main.EmptyRequest;
 import chess.controller.main.RequestData;
 import chess.controller.room.join.JoinBoardRequest;
 import chess.controller.user.LoginRequest;
@@ -11,12 +12,12 @@ import java.util.Map;
 import java.util.function.Function;
 
 public enum DataFactory {
-    START(ActionType.START, EmptyRequestImpl.class, EmptyRequestImpl::new),
-    END(ActionType.END, EmptyRequestImpl.class, EmptyRequestImpl::new),
+    START(ActionType.START, EmptyRequest.class, EmptyRequestImpl::new),
+    END(ActionType.END, EmptyRequest.class, EmptyRequestImpl::new),
     MOVE(ActionType.MOVE, MoveRequest.class, MoveRequestImpl::new),
-    STATUS(ActionType.STATUS, EmptyRequestImpl.class, EmptyRequestImpl::new),
-    GAMES(ActionType.GAMES, EmptyRequestImpl.class, EmptyRequestImpl::new),
-    CREATE(ActionType.CREATE, EmptyRequestImpl.class, EmptyRequestImpl::new),
+    STATUS(ActionType.STATUS, EmptyRequest.class, EmptyRequestImpl::new),
+    GAMES(ActionType.GAMES, EmptyRequest.class, EmptyRequestImpl::new),
+    CREATE(ActionType.CREATE, EmptyRequest.class, EmptyRequestImpl::new),
     JOIN(ActionType.JOIN, JoinBoardRequest.class, JoinBoardRequestImpl::new),
     LOGIN(ActionType.LOGIN, LoginRequest.class, LoginRequestImpl::new);
 

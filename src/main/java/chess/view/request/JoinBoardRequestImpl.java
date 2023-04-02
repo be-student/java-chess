@@ -17,7 +17,7 @@ public class JoinBoardRequestImpl implements JoinBoardRequest {
 
     private void validateCommands(List<String> commands) {
         if (commands.size() != JOIN_COMMAND_SIZE) {
-            throw new IllegalArgumentException("잘못된 명령어입니다.");
+            throw new IllegalArgumentException("잘못된 입력입니다. join [게임 번호]를 입력해주세요");
         }
     }
 
