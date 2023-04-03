@@ -10,20 +10,18 @@ import java.util.Optional;
 
 public class EndChessGameService {
 
-    private final LoadChessGameService loadChessGameService;
     private final ChessGameRepository chessGameRepository;
 
-    public EndChessGameService(LoadChessGameService loadChessGameService, ChessGameRepository chessGameRepository) {
-        this.loadChessGameService = loadChessGameService;
+    public EndChessGameService(ChessGameRepository chessGameRepository) {
         this.chessGameRepository = chessGameRepository;
     }
 
     public void end(int boardId) {
-        Command command = new EndCommand();
-        Optional<ChessGame> chessGame = loadChessGameService.load(boardId);
+        Optional<ChessGame> chessGame = chessGameRepository.findById(boardId);
         if (chessGame.isEmpty()) {
             throw new BoardNotFoundException();
         }
+        Command command = new EndCommand();
         command.execute(chessGame.get());
         chessGameRepository.saveGameState(boardId, EndState.getInstance());
     }

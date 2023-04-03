@@ -9,20 +9,18 @@ import java.util.Optional;
 
 public class MoveChessGameService {
 
-    private final LoadChessGameService loadChessGameService;
     private final ChessGameRepository chessGameRepository;
 
-    public MoveChessGameService(LoadChessGameService loadChessGameService, ChessGameRepository chessGameRepository) {
-        this.loadChessGameService = loadChessGameService;
+    public MoveChessGameService(ChessGameRepository chessGameRepository) {
         this.chessGameRepository = chessGameRepository;
     }
 
     public void move(int boardId, String source, String target) {
-        Command command = MoveCommand.of(source, target);
-        Optional<ChessGame> chessGame = loadChessGameService.load(boardId);
+        Optional<ChessGame> chessGame = chessGameRepository.findById(boardId);
         if (chessGame.isEmpty()) {
             throw new BoardNotFoundException();
         }
+        Command command = MoveCommand.of(source, target);
         command.execute(chessGame.get());
         chessGameRepository.saveMoves(boardId, source, target, chessGame.get().getTurn().getValue());
     }

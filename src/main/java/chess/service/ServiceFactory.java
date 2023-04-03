@@ -35,10 +35,10 @@ public class ServiceFactory {
         jdbcTemplate = new JdbcTemplate(ConnectionPoolImpl.getInstance());
         ChessGameRepository chessGameRepository = new ChessGameRepositoryImpl(createChessGameDao(), createMoveDao());
         loadChessGameService = new LoadChessGameService(chessGameRepository);
-        startChessGameService = new StartChessGameService(loadChessGameService, chessGameRepository);
-        endChessGameService = new EndChessGameService(loadChessGameService, chessGameRepository);
-        moveChessGameService = new MoveChessGameService(loadChessGameService, chessGameRepository);
-        statusChessGameService = new StatusChessGameService(loadChessGameService);
+        startChessGameService = new StartChessGameService(chessGameRepository);
+        endChessGameService = new EndChessGameService(chessGameRepository);
+        moveChessGameService = new MoveChessGameService(chessGameRepository);
+        statusChessGameService = new StatusChessGameService(chessGameRepository);
         gamesService = new GamesService(chessGameRepository);
         createRoomService = new CreateRoomService(chessGameRepository);
         loginService = new LoginService(createUserRepository());
