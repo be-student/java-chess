@@ -1,14 +1,14 @@
 package chess.service.game;
 
 import chess.domain.game.ChessGame;
-import chess.service.repository.ChessGameRepository;
+import chess.service.ChessGameRepository;
 import java.util.Optional;
 
-public class LoadChessGameService {
+public class ChessLoadService {
 
     private final ChessGameRepository chessGameRepository;
 
-    public LoadChessGameService(ChessGameRepository chessGameRepository) {
+    public ChessLoadService(ChessGameRepository chessGameRepository) {
         this.chessGameRepository = chessGameRepository;
     }
 

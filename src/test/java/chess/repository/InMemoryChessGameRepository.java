@@ -2,7 +2,7 @@ package chess.repository;
 
 import chess.domain.game.ChessGame;
 import chess.domain.game.state.GameState;
-import chess.service.repository.ChessGameRepository;
+import chess.service.ChessGameRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

@@ -32,7 +32,7 @@ class EndStateTest {
         GameState resultState = endState.start();
 
         //when
-        boolean result = resultState == StartState.getInstance();
+        boolean result = resultState == ReadyState.getInstance();
 
         //then
         assertTrue(result);

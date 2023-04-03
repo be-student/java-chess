@@ -1,7 +1,7 @@
 package chess.service.user;
 
 import chess.repository.user.UserDto;
-import chess.service.repository.UserRepository;
+import chess.service.UserRepository;
 import java.util.Optional;
 
 public class LoginService {

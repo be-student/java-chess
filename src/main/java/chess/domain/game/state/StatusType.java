@@ -7,8 +7,8 @@ public enum StatusType {
 
     private final String statusName;
 
-    StatusType(String start) {
-        statusName = start;
+    StatusType(String statusName) {
+        this.statusName = statusName;
     }
 
     public String getStatusName() {

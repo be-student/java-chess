@@ -1,4 +1,4 @@
-package chess.controller.room.join;
+package chess.controller.game.move;
 
 import chess.controller.Controller;
 import chess.controller.exception.BoardNotFoundException;
@@ -6,36 +6,34 @@ import chess.controller.game.BoardOutput;
 import chess.controller.main.Request;
 import chess.domain.game.ChessGame;
 import chess.domain.piece.Piece;
-import chess.service.game.LoadChessGameService;
+import chess.service.game.ChessLoadService;
+import chess.service.game.ChessMoveService;
 import chess.view.response.PieceResponse;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class JoinBoardController implements Controller {
+public class ChessMoveController implements Controller {
 
-    private final JoinBoard joinBoard;
-    private final JoinBoardOutput joinBoardOutput;
-    private final LoadChessGameService loadChessGameService;
+    private final ChessMoveService chessMoveService;
+    private final ChessLoadService chessLoadService;
     private final BoardOutput boardOutput;
 
-    public JoinBoardController(JoinBoard joinBoard, JoinBoardOutput joinBoardOutput,
-            LoadChessGameService loadChessGameService, BoardOutput boardOutput) {
-        this.joinBoard = joinBoard;
-        this.joinBoardOutput = joinBoardOutput;
-        this.loadChessGameService = loadChessGameService;
+    public ChessMoveController(ChessMoveService chessMoveService, ChessLoadService chessLoadService,
+            BoardOutput boardOutput) {
+        this.chessMoveService = chessMoveService;
+        this.chessLoadService = chessLoadService;
         this.boardOutput = boardOutput;
     }
 
     @Override
     public void run(Request request) {
-        JoinBoardRequest joinBoardRequest = request.getData(JoinBoardRequest.class);
-        joinBoard.join(joinBoardRequest.getBoardId());
-        Optional<ChessGame> chessGame = loadChessGameService.load(joinBoardRequest.getBoardId());
+        MoveRequest moveRequest = request.getData(MoveRequest.class);
+        chessMoveService.move(request.getBoardId().get(), moveRequest.getOrigin(), moveRequest.getDestination());
+        Optional<ChessGame> chessGame = chessLoadService.load(request.getBoardId().get());
         if (chessGame.isEmpty()) {
             throw new BoardNotFoundException();
         }
-        joinBoardOutput.printJoinBoardSuccess(chessGame.get().getStatusType());
         boardOutput.printBoard(makeBoardResponse(chessGame.get().getPieces()));
     }
 

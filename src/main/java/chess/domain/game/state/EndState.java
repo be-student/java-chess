@@ -17,7 +17,7 @@ public class EndState implements GameState {
 
     @Override
     public GameState start() {
-        return StartState.getInstance();
+        return ReadyState.getInstance();
     }
 
     @Override

@@ -7,7 +7,7 @@ import chess.controller.BoardOutputSpy;
 import chess.controller.main.Request;
 import chess.domain.game.state.StatusType;
 import chess.repository.InMemoryChessGameRepository;
-import chess.service.game.LoadChessGameService;
+import chess.service.game.ChessLoadService;
 import chess.view.request.RequestImpl;
 import java.util.List;
 import java.util.Optional;
@@ -17,20 +17,20 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings({"NonAsciiCharacters", "SpellCheckingInspection"})
 @DisplayNameGeneration(ReplaceUnderscores.class)
-class JoinBoardControllerTest {
+class ChessJoinBoardControllerTest {
 
     private final InMemoryChessGameRepository chessGameRepository = new InMemoryChessGameRepository();
     private final JoinBoardOutputSpy joinBoardOutputSpy = new JoinBoardOutputSpy();
     private final JoinBoardSpy joinBoardSpy = new JoinBoardSpy();
-    private final JoinBoardController joinBoardController = new JoinBoardController(joinBoardSpy,
-            joinBoardOutputSpy, new LoadChessGameService(chessGameRepository), new BoardOutputSpy());
+    private final ChessJoinBoardController chessJoinBoardController = new ChessJoinBoardController(joinBoardSpy,
+            joinBoardOutputSpy, new ChessLoadService(chessGameRepository), new BoardOutputSpy());
 
     @Test
     void 게임_참여_성공() {
         // given
         int boardId = chessGameRepository.create(1);
         // when
-        joinBoardController.run(createRequest(List.of("join", String.valueOf(boardId))));
+        chessJoinBoardController.run(createRequest(List.of("join", String.valueOf(boardId))));
         // then
         assertAll(
                 () -> assertThat(joinBoardSpy.getBoardId()).isEqualTo(boardId),

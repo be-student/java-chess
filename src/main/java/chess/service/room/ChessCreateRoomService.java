@@ -1,12 +1,12 @@
 package chess.service.room;
 
-import chess.service.repository.ChessGameRepository;
+import chess.service.ChessGameRepository;
 
-public class CreateRoomService {
+public class ChessCreateRoomService {
 
     private final ChessGameRepository chessGameRepository;
 
-    public CreateRoomService(ChessGameRepository chessGameRepository) {
+    public ChessCreateRoomService(ChessGameRepository chessGameRepository) {
         this.chessGameRepository = chessGameRepository;
     }
 

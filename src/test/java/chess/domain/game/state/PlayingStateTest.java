@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings({"NonAsciiCharacters", "SpellCheckingInspection"})
 @DisplayNameGeneration(ReplaceUnderscores.class)
-class MovingStateTest {
+class PlayingStateTest {
 
-    private final MovingState movingState = MovingState.getInstance();
+    private final PlayingState playingState = PlayingState.getInstance();
 
     @Test
     void getInstance_를_통해_가져오면_동일한_객체가_반환된다() {
         //given
-        MovingState resultState = MovingState.getInstance();
+        PlayingState resultState = PlayingState.getInstance();
 
         //when
-        boolean result = movingState == resultState;
+        boolean result = playingState == resultState;
 
         //then
         assertTrue(result);
@@ -27,10 +27,10 @@ class MovingStateTest {
     @Test
     void start_를_실행하면_처음으로_돌아간다() {
         //given
-        GameState resultState = movingState.start();
+        GameState resultState = playingState.start();
 
         //when
-        boolean result = resultState == StartState.getInstance();
+        boolean result = resultState == ReadyState.getInstance();
 
         //then
         assertTrue(result);
@@ -39,7 +39,7 @@ class MovingStateTest {
     @Test
     void end_를_실행하면_종료된_상태가_반환된다() {
         //given
-        GameState resultState = movingState.end();
+        GameState resultState = playingState.end();
 
         //when
         boolean result = resultState == EndState.getInstance();
@@ -51,10 +51,10 @@ class MovingStateTest {
     @Test
     void run을_실행하면_현재_상태가_반환된다() {
         //given
-        GameState resultState = movingState.run();
+        GameState resultState = playingState.run();
 
         //when
-        boolean result = resultState == movingState;
+        boolean result = resultState == playingState;
 
         //then
         assertTrue(result);

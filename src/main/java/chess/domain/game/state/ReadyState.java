@@ -2,21 +2,21 @@ package chess.domain.game.state;
 
 import chess.domain.game.exception.ChessGameException;
 
-public class StartState implements GameState {
+public class ReadyState implements GameState {
 
     private static final StatusType STATUS_TYPE = StatusType.START;
-    private static final StartState INSTANCE = new StartState();
+    private static final ReadyState INSTANCE = new ReadyState();
 
-    private StartState() {
+    private ReadyState() {
     }
 
-    public static StartState getInstance() {
+    public static ReadyState getInstance() {
         return INSTANCE;
     }
 
     @Override
     public GameState start() {
-        return MovingState.getInstance();
+        return PlayingState.getInstance();
     }
 
     @Override

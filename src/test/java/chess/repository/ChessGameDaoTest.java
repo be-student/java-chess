@@ -3,8 +3,8 @@ package chess.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-import chess.domain.game.state.MovingState;
-import chess.domain.game.state.StartState;
+import chess.domain.game.state.PlayingState;
+import chess.domain.game.state.ReadyState;
 import chess.mysql.JdbcTemplate;
 import chess.mysql.TestConnectionPool;
 import chess.repository.chess.ChessGameDao;
@@ -45,7 +45,7 @@ class ChessGameDaoTest {
     @Order(1)
     void save를_통해_새로운_보드를_생성할_수_있다() {
         //expect
-        assertDoesNotThrow(() -> chessGameDao.save(userId, StartState.getInstance()));
+        assertDoesNotThrow(() -> chessGameDao.save(userId, ReadyState.getInstance()));
     }
 
     @Test
@@ -70,10 +70,10 @@ class ChessGameDaoTest {
     @Order(4)
     void update() {
         //given
-        int boardId = chessGameDao.save(userId, StartState.getInstance());
-        chessGameDao.update(boardId, MovingState.getInstance());
+        int boardId = chessGameDao.save(userId, ReadyState.getInstance());
+        chessGameDao.update(boardId, PlayingState.getInstance());
 
         //expect
-        assertThat(chessGameDao.findStatusByBoardId(boardId)).contains(MovingState.getInstance().getStateName());
+        assertThat(chessGameDao.findStatusByBoardId(boardId)).contains(PlayingState.getInstance().getStateName());
     }
 }

@@ -4,9 +4,9 @@ import chess.domain.game.ChessGame;
 import chess.domain.game.Position;
 import chess.domain.game.state.EndState;
 import chess.domain.game.state.GameState;
-import chess.domain.game.state.MovingState;
-import chess.domain.game.state.StartState;
-import chess.service.repository.ChessGameRepository;
+import chess.domain.game.state.PlayingState;
+import chess.domain.game.state.ReadyState;
+import chess.service.ChessGameRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +24,7 @@ public class ChessGameRepositoryImpl implements ChessGameRepository {
 
     @Override
     public int create(int userId) {
-        return chessGameDao.save(userId, StartState.getInstance());
+        return chessGameDao.save(userId, ReadyState.getInstance());
     }
 
     @Override
@@ -58,9 +58,9 @@ public class ChessGameRepositoryImpl implements ChessGameRepository {
     private Optional<GameState> getState(String status) {
         switch (status) {
             case "start":
-                return Optional.of(StartState.getInstance());
+                return Optional.of(ReadyState.getInstance());
             case "playing":
-                return Optional.of(MovingState.getInstance());
+                return Optional.of(PlayingState.getInstance());
             case "end":
                 return Optional.of(EndState.getInstance());
             default:

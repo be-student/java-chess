@@ -7,14 +7,13 @@ import chess.repository.chess.ChessGameRepositoryImpl;
 import chess.repository.chess.MoveDao;
 import chess.repository.user.UserDao;
 import chess.repository.user.UserRepositoryImpl;
-import chess.service.game.EndChessGameService;
-import chess.service.game.GamesService;
-import chess.service.game.LoadChessGameService;
-import chess.service.game.MoveChessGameService;
-import chess.service.game.StartChessGameService;
-import chess.service.game.StatusChessGameService;
-import chess.service.repository.ChessGameRepository;
-import chess.service.room.CreateRoomService;
+import chess.service.game.ChessEndService;
+import chess.service.game.ChessGamesService;
+import chess.service.game.ChessLoadService;
+import chess.service.game.ChessMoveService;
+import chess.service.game.ChessStartService;
+import chess.service.game.ChessStatusService;
+import chess.service.room.ChessCreateRoomService;
 import chess.service.user.LoginService;
 
 public class ServiceFactory {
@@ -22,25 +21,25 @@ public class ServiceFactory {
     private static final ServiceFactory instance = new ServiceFactory();
 
     private final JdbcTemplate jdbcTemplate;
-    private final StartChessGameService startChessGameService;
-    private final EndChessGameService endChessGameService;
-    private final MoveChessGameService moveChessGameService;
-    private final LoadChessGameService loadChessGameService;
-    private final StatusChessGameService statusChessGameService;
-    private final CreateRoomService createRoomService;
+    private final ChessStartService chessStartService;
+    private final ChessEndService chessEndService;
+    private final ChessMoveService chessMoveService;
+    private final ChessLoadService chessLoadService;
+    private final ChessStatusService chessStatusService;
+    private final ChessCreateRoomService chessCreateRoomService;
     private final LoginService loginService;
-    private final GamesService gamesService;
+    private final ChessGamesService chessGamesService;
 
     private ServiceFactory() {
         jdbcTemplate = new JdbcTemplate(ConnectionPoolImpl.getInstance());
         ChessGameRepository chessGameRepository = new ChessGameRepositoryImpl(createChessGameDao(), createMoveDao());
-        loadChessGameService = new LoadChessGameService(chessGameRepository);
-        startChessGameService = new StartChessGameService(chessGameRepository);
-        endChessGameService = new EndChessGameService(chessGameRepository);
-        moveChessGameService = new MoveChessGameService(chessGameRepository);
-        statusChessGameService = new StatusChessGameService(chessGameRepository);
-        gamesService = new GamesService(chessGameRepository);
-        createRoomService = new CreateRoomService(chessGameRepository);
+        chessLoadService = new ChessLoadService(chessGameRepository);
+        chessStartService = new ChessStartService(chessGameRepository);
+        chessEndService = new ChessEndService(chessGameRepository);
+        chessMoveService = new ChessMoveService(chessGameRepository);
+        chessStatusService = new ChessStatusService(chessGameRepository);
+        chessGamesService = new ChessGamesService(chessGameRepository);
+        chessCreateRoomService = new ChessCreateRoomService(chessGameRepository);
         loginService = new LoginService(createUserRepository());
     }
 
@@ -48,20 +47,20 @@ public class ServiceFactory {
         return instance;
     }
 
-    public StatusChessGameService getStatusChessGameService() {
-        return statusChessGameService;
+    public ChessStatusService getStatusChessGameService() {
+        return chessStatusService;
     }
 
-    public CreateRoomService getCreateRoomService() {
-        return createRoomService;
+    public ChessCreateRoomService getCreateRoomService() {
+        return chessCreateRoomService;
     }
 
     public LoginService getLoginService() {
         return loginService;
     }
 
-    public GamesService getGamesService() {
-        return gamesService;
+    public ChessGamesService getGamesService() {
+        return chessGamesService;
     }
 
     private ChessGameDao createChessGameDao() {
@@ -76,19 +75,19 @@ public class ServiceFactory {
         return new MoveDao(jdbcTemplate);
     }
 
-    public StartChessGameService getStartChessGameService() {
-        return startChessGameService;
+    public ChessStartService getStartChessGameService() {
+        return chessStartService;
     }
 
-    public EndChessGameService getEndChessGameService() {
-        return endChessGameService;
+    public ChessEndService getEndChessGameService() {
+        return chessEndService;
     }
 
-    public MoveChessGameService getMoveChessGameService() {
-        return moveChessGameService;
+    public ChessMoveService getMoveChessGameService() {
+        return chessMoveService;
     }
 
-    public LoadChessGameService getLoadChessGameService() {
-        return loadChessGameService;
+    public ChessLoadService getLoadChessGameService() {
+        return chessLoadService;
     }
 }

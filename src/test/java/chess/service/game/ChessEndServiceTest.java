@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings({"NonAsciiCharacters", "SpellCheckingInspection"})
 @DisplayNameGeneration(ReplaceUnderscores.class)
-class EndChessGameServiceTest {
+class ChessEndServiceTest {
 
     private final InMemoryChessGameRepository inMemoryChessGameRepository = new InMemoryChessGameRepository();
-    private final EndChessGameService endChessGameService = new EndChessGameService(inMemoryChessGameRepository);
+    private final ChessEndService chessEndService = new ChessEndService(inMemoryChessGameRepository);
 
     @Test
     void 작동시키면_끝난다() {
@@ -24,7 +24,7 @@ class EndChessGameServiceTest {
         int boardId = inMemoryChessGameRepository.create(1);
 
         // when
-        endChessGameService.end(1);
+        chessEndService.end(1);
 
         // then
         Optional<ChessGame> chessGame = inMemoryChessGameRepository.findById(boardId);

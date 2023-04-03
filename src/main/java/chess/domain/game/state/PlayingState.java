@@ -1,20 +1,20 @@
 package chess.domain.game.state;
 
-public class MovingState implements GameState {
+public class PlayingState implements GameState {
 
     private static final StatusType STATUS_TYPE = StatusType.PLAYING;
-    private static final MovingState INSTANCE = new MovingState();
+    private static final PlayingState INSTANCE = new PlayingState();
 
-    private MovingState() {
+    private PlayingState() {
     }
 
-    public static MovingState getInstance() {
+    public static PlayingState getInstance() {
         return INSTANCE;
     }
 
     @Override
     public GameState start() {
-        return StartState.getInstance();
+        return ReadyState.getInstance();
     }
 
     @Override

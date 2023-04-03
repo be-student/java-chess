@@ -4,15 +4,15 @@ import chess.controller.exception.BoardNotFoundException;
 import chess.controller.game.status.StatusResponse;
 import chess.domain.game.ChessGame;
 import chess.domain.piece.Color;
-import chess.service.repository.ChessGameRepository;
+import chess.service.ChessGameRepository;
 import java.util.Map;
 import java.util.Optional;
 
-public class StatusChessGameService {
+public class ChessStatusService {
 
     private final ChessGameRepository chessGameRepository;
 
-    public StatusChessGameService(ChessGameRepository chessGameRepository) {
+    public ChessStatusService(ChessGameRepository chessGameRepository) {
         this.chessGameRepository = chessGameRepository;
     }
 

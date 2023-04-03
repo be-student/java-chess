@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.controller.main.Request;
 import chess.repository.InMemoryChessGameRepository;
-import chess.service.room.CreateRoomService;
+import chess.service.room.ChessCreateRoomService;
 import chess.view.request.RequestImpl;
 import java.util.List;
 import java.util.Optional;
@@ -15,20 +15,21 @@ import org.junit.jupiter.api.Test;
 
 @SuppressWarnings({"NonAsciiCharacters", "SpellCheckingInspection"})
 @DisplayNameGeneration(ReplaceUnderscores.class)
-class CreateRoomControllerTest {
+class ChessCreateRoomControllerTest {
 
     private final InMemoryChessGameRepository inMemoryChessGameRepository = new InMemoryChessGameRepository();
-    private final CreateRoomService createRoomService = new CreateRoomService(inMemoryChessGameRepository);
+    private final ChessCreateRoomService chessCreateRoomService = new ChessCreateRoomService(
+            inMemoryChessGameRepository);
 
     private final CreateRoomOutputSpy createRoomOutputSpy = new CreateRoomOutputSpy();
 
     @Test
     void 방_생성_성공() {
         //given
-        CreateRoomController createRoomController
-                = new CreateRoomController(createRoomService, createRoomOutputSpy);
+        ChessCreateRoomController chessCreateRoomController
+                = new ChessCreateRoomController(chessCreateRoomService, createRoomOutputSpy);
         // when
-        createRoomController.run(createRequest(List.of("create")));
+        chessCreateRoomController.run(createRequest(List.of("create")));
         // then
         assertAll(
                 () -> assertThat(createRoomOutputSpy.getCount()).isOne(),

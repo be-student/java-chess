@@ -6,10 +6,10 @@ import chess.domain.game.exception.ChessGameException;
 import chess.repository.InMemoryChessGameRepository;
 import org.junit.jupiter.api.Test;
 
-class MoveChessGameServiceTest {
+class ChessMoveServiceTest {
 
     private final InMemoryChessGameRepository inMemoryChessGameRepository = new InMemoryChessGameRepository();
-    private final MoveChessGameService moveChessGameService = new MoveChessGameService(inMemoryChessGameRepository);
+    private final ChessMoveService chessMoveService = new ChessMoveService(inMemoryChessGameRepository);
 
     @Test
     void 다음_칸으로_이동한다() {
@@ -18,10 +18,10 @@ class MoveChessGameServiceTest {
         inMemoryChessGameRepository.findById(boardId).get().start();
 
         // when
-        moveChessGameService.move(boardId, "a2", "a3");
+        chessMoveService.move(boardId, "a2", "a3");
 
         // then
-        assertThatThrownBy(() -> moveChessGameService.move(boardId, "a2", "a3"))
+        assertThatThrownBy(() -> chessMoveService.move(boardId, "a2", "a3"))
                 .isInstanceOf(ChessGameException.class)
                 .hasMessage("이동할 말이 없습니다.");
     }

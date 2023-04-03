@@ -1,4 +1,4 @@
-package chess.service.repository;
+package chess.service;
 
 import chess.repository.user.UserDto;
 import java.util.Optional;

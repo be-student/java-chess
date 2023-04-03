@@ -5,29 +5,29 @@ import chess.controller.game.BoardOutput;
 import chess.controller.main.Request;
 import chess.domain.game.ChessGame;
 import chess.domain.piece.Piece;
-import chess.service.game.LoadChessGameService;
-import chess.service.game.StartChessGameService;
+import chess.service.game.ChessLoadService;
+import chess.service.game.ChessStartService;
 import chess.view.response.PieceResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StartController implements Controller {
+public class ChessStartController implements Controller {
 
-    private final StartChessGameService startChessGameService;
-    private final LoadChessGameService loadChessGameService;
+    private final ChessStartService chessStartService;
+    private final ChessLoadService chessLoadService;
     private final BoardOutput boardOutput;
 
-    public StartController(StartChessGameService startChessGameService, LoadChessGameService loadChessGameService,
+    public ChessStartController(ChessStartService chessStartService, ChessLoadService chessLoadService,
             BoardOutput boardOutput) {
-        this.startChessGameService = startChessGameService;
-        this.loadChessGameService = loadChessGameService;
+        this.chessStartService = chessStartService;
+        this.chessLoadService = chessLoadService;
         this.boardOutput = boardOutput;
     }
 
     @Override
     public void run(Request request) {
-        startChessGameService.start(request.getBoardId().get());
-        ChessGame chessGame = loadChessGameService.load(request.getBoardId().get()).get();
+        chessStartService.start(request.getBoardId().get());
+        ChessGame chessGame = chessLoadService.load(request.getBoardId().get()).get();
         boardOutput.printBoard(makeBoardResponse(chessGame.getPieces()));
     }
 

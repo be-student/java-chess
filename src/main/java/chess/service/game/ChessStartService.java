@@ -3,25 +3,25 @@ package chess.service.game;
 import chess.controller.exception.BoardNotFoundException;
 import chess.domain.game.ChessGame;
 import chess.domain.game.command.Command;
-import chess.domain.game.command.MoveCommand;
-import chess.service.repository.ChessGameRepository;
+import chess.domain.game.command.StartCommand;
+import chess.service.ChessGameRepository;
 import java.util.Optional;
 
-public class MoveChessGameService {
+public class ChessStartService {
 
     private final ChessGameRepository chessGameRepository;
 
-    public MoveChessGameService(ChessGameRepository chessGameRepository) {
+    public ChessStartService(ChessGameRepository chessGameRepository) {
         this.chessGameRepository = chessGameRepository;
     }
 
-    public void move(int boardId, String source, String target) {
+    public void start(int boardId) {
         Optional<ChessGame> chessGame = chessGameRepository.findById(boardId);
         if (chessGame.isEmpty()) {
             throw new BoardNotFoundException();
         }
-        Command command = MoveCommand.of(source, target);
+        Command command = new StartCommand();
         command.execute(chessGame.get());
-        chessGameRepository.saveMoves(boardId, source, target, chessGame.get().getTurn().getValue());
+        chessGameRepository.saveGameState(boardId, chessGame.get().getGameState());
     }
 }
