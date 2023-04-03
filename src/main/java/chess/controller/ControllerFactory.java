@@ -18,35 +18,13 @@ import java.util.Map;
 public class ControllerFactory {
 
     private static final ControllerFactory instance = new ControllerFactory();
-
-    private final StartController startController;
-    private final EndController endController;
     private final MainController mainController;
-    private final MoveController moveController;
-    private final StatusController statusController;
-    private final GamesController gamesController;
-    private final CreateRoomController createRoomController;
-    private final JoinBoardController joinBoardController;
-    private final LoginController loginController;
+    private final Map<ActionType, Controller> controllers;
 
     private ControllerFactory() {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         ViewFactory viewFactory = ViewFactory.getInstance();
-        startController = new StartController(serviceFactory.getStartChessGameService(),
-                serviceFactory.getLoadChessGameService(),
-                viewFactory.getBoardOutput());
-        endController = new EndController(serviceFactory.getEndChessGameService());
-        moveController = new MoveController(serviceFactory.getMoveChessGameService(),
-                serviceFactory.getLoadChessGameService(), viewFactory.getBoardOutput());
-        statusController = new StatusController(viewFactory.getStatusOutput(),
-                serviceFactory.getStatusChessGameService());
-        gamesController = new GamesController(serviceFactory.getGamesService(), viewFactory.getGamesOutput());
-        createRoomController = new CreateRoomController(serviceFactory.getCreateRoomService(),
-                viewFactory.getCreateRoomOutput());
-        joinBoardController = new JoinBoardController(viewFactory.getJoinBoard(), viewFactory.getJoinBoardOutput(),
-                serviceFactory.getLoadChessGameService(), viewFactory.getBoardOutput());
-        loginController = new LoginController(viewFactory.getLogin(), viewFactory.getLoginOutput(),
-                serviceFactory.getLoginService());
+        controllers = initializeControllers(serviceFactory, viewFactory);
         mainController = new MainController(createControllerMapper(), viewFactory.getErrorOutput(),
                 viewFactory.getInputView(), viewFactory.getInitialOutput());
     }
@@ -55,8 +33,25 @@ public class ControllerFactory {
         return instance;
     }
 
-    private ControllerMapper createControllerMapper() {
-        return new ControllerMapper(Map.of(
+    private Map<ActionType, Controller> initializeControllers(ServiceFactory serviceFactory, ViewFactory viewFactory) {
+        Controller startController = new StartController(serviceFactory.getStartChessGameService(),
+                serviceFactory.getLoadChessGameService(),
+                viewFactory.getBoardOutput());
+        Controller endController = new EndController(serviceFactory.getEndChessGameService());
+        Controller moveController = new MoveController(serviceFactory.getMoveChessGameService(),
+                serviceFactory.getLoadChessGameService(), viewFactory.getBoardOutput());
+        Controller statusController = new StatusController(viewFactory.getStatusOutput(),
+                serviceFactory.getStatusChessGameService());
+        Controller gamesController = new GamesController(serviceFactory.getGamesService(),
+                viewFactory.getGamesOutput());
+        Controller createRoomController = new CreateRoomController(serviceFactory.getCreateRoomService(),
+                viewFactory.getCreateRoomOutput());
+        Controller joinBoardController = new JoinBoardController(viewFactory.getJoinBoard(),
+                viewFactory.getJoinBoardOutput(),
+                serviceFactory.getLoadChessGameService(), viewFactory.getBoardOutput());
+        Controller loginController = new LoginController(viewFactory.getLogin(), viewFactory.getLoginOutput(),
+                serviceFactory.getLoginService());
+        return Map.of(
                 ActionType.START, startController,
                 ActionType.END, endController,
                 ActionType.MOVE, moveController,
@@ -65,7 +60,11 @@ public class ControllerFactory {
                 ActionType.CREATE, createRoomController,
                 ActionType.JOIN, joinBoardController,
                 ActionType.LOGIN, loginController
-        ));
+        );
+    }
+
+    private ControllerMapper createControllerMapper() {
+        return new ControllerMapper(controllers);
     }
 
     public MainController getMainController() {
