@@ -6,7 +6,7 @@ import chess.controller.game.move.MoveController;
 import chess.controller.game.start.StartController;
 import chess.controller.game.status.StatusController;
 import chess.controller.main.ActionType;
-import chess.controller.main.CommandMapper;
+import chess.controller.main.ControllerMapper;
 import chess.controller.main.MainController;
 import chess.controller.room.create.CreateRoomController;
 import chess.controller.room.join.JoinBoardController;
@@ -47,7 +47,7 @@ public class ControllerFactory {
                 serviceFactory.getLoadChessGameService(), viewFactory.getBoardOutput());
         loginController = new LoginController(viewFactory.getLogin(), viewFactory.getLoginOutput(),
                 serviceFactory.getLoginService());
-        mainController = new MainController(createCommandMapper(), viewFactory.getErrorOutput(),
+        mainController = new MainController(createControllerMapper(), viewFactory.getErrorOutput(),
                 viewFactory.getInputView(), viewFactory.getInitialOutput());
     }
 
@@ -55,8 +55,8 @@ public class ControllerFactory {
         return instance;
     }
 
-    private CommandMapper createCommandMapper() {
-        return new CommandMapper(Map.of(
+    private ControllerMapper createControllerMapper() {
+        return new ControllerMapper(Map.of(
                 ActionType.START, startController,
                 ActionType.END, endController,
                 ActionType.MOVE, moveController,

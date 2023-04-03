@@ -3,6 +3,7 @@ package chess.controller.game.games;
 import chess.controller.Controller;
 import chess.controller.main.Request;
 import chess.service.game.GamesService;
+import java.util.List;
 
 public class GamesController implements Controller {
 
@@ -16,6 +17,7 @@ public class GamesController implements Controller {
 
     @Override
     public void run(Request request) {
-        gamesOutput.printGames(gamesService.findAllGamesByUserId(request.getUserId().get()));
+        List<Integer> allUserGameIds = gamesService.findAllGamesByUserId(request.getUserId().get());
+        gamesOutput.printGames(allUserGameIds);
     }
 }

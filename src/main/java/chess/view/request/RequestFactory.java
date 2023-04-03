@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public enum DataFactory {
+public enum RequestFactory {
     START(ActionType.START, EmptyRequest.class, EmptyRequestImpl::new),
     END(ActionType.END, EmptyRequest.class, EmptyRequestImpl::new),
     MOVE(ActionType.MOVE, MoveRequest.class, MoveRequestImpl::new),
@@ -25,7 +25,7 @@ public enum DataFactory {
     private final Class<? extends RequestData> requestType;
     private final Function<List<String>, ? extends RequestData> requestData;
 
-    <T extends RequestData, R extends T> DataFactory(ActionType actionType,
+    <T extends RequestData, R extends T> RequestFactory(ActionType actionType,
             Class<T> requestType,
             Function<List<String>, R> requestData) {
         this.actionType = actionType;
@@ -35,18 +35,18 @@ public enum DataFactory {
 
     public static <T extends RequestData, R extends T> Map<Class<T>, R> map(List<String> commands,
             ActionType actionType) {
-        DataFactory dataFactory = findDataFactory(actionType);
+        RequestFactory requestFactory = findRequestFactory(actionType);
         @SuppressWarnings("unchecked")
         Map<Class<T>, R> map = Map.of(
-                (Class<T>) dataFactory.requestType,
-                (R) dataFactory.requestData.apply(commands)
+                (Class<T>) requestFactory.requestType,
+                (R) requestFactory.requestData.apply(commands)
         );
         return map;
     }
 
-    private static DataFactory findDataFactory(ActionType actionType) {
+    private static RequestFactory findRequestFactory(ActionType actionType) {
         return Arrays.stream(values())
-                .filter(dataFactory -> dataFactory.actionType == actionType)
+                .filter(requestFactory -> requestFactory.actionType == actionType)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 ActionType이 없습니다."));
     }

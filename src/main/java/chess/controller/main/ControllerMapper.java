@@ -3,11 +3,11 @@ package chess.controller.main;
 import chess.controller.Controller;
 import java.util.Map;
 
-public class CommandMapper {
+public class ControllerMapper {
 
     private final Map<ActionType, Controller> actions;
 
-    public CommandMapper(Map<ActionType, Controller> actions) {
+    public ControllerMapper(Map<ActionType, Controller> actions) {
         this.actions = actions;
     }
 

@@ -52,7 +52,11 @@ public class ChessGameRepositoryImpl implements ChessGameRepository {
         if (status.isEmpty()) {
             return Optional.empty();
         }
-        switch (status.get()) {
+        return getState(status.get());
+    }
+
+    private Optional<GameState> getState(String status) {
+        switch (status) {
             case "start":
                 return Optional.of(StartState.getInstance());
             case "playing":
