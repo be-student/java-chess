@@ -13,11 +13,12 @@ import java.util.Map;
 
 public class ChessGame {
 
-    private Board board;
+    private final Board board;
     private GameState gameState;
 
     public ChessGame() {
         gameState = StartState.getInstance();
+        board = new Board();
     }
 
     public ChessGame(List<List<Position>> moves, GameState gameState) {
@@ -29,7 +30,6 @@ public class ChessGame {
 
     public void start() {
         gameState = gameState.start();
-        board = new Board();
     }
 
     public void move(Position origin, Position destination) {
@@ -49,9 +49,6 @@ public class ChessGame {
     }
 
     public List<List<Piece>> getPieces() {
-        if (gameState.notStarted()) {
-            throw new ChessGameException("게임이 시작되지 않았습니다.");
-        }
         return board.getPieces();
     }
 

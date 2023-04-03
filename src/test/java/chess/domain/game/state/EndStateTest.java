@@ -53,4 +53,13 @@ class EndStateTest {
                 .isInstanceOf(ChessGameException.class)
                 .hasMessage("게임이 종료되었습니다.");
     }
+
+    @Test
+    void 게임이_시작되었다() {
+        //when
+        boolean result = endState.isStarted();
+
+        //then
+        assertTrue(result);
+    }
 }

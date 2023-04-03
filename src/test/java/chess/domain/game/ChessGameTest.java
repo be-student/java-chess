@@ -39,18 +39,6 @@ class ChessGameTest {
     }
 
     @Test
-    void 시작을_하지_않은_상태로_보드를_가져오면_예외가_발생한다() {
-        //given
-        ChessGame chessGame = new ChessGame();
-
-        //when
-        //then
-        assertThatThrownBy(chessGame::getPieces)
-                .isInstanceOf(ChessGameException.class)
-                .hasMessage("게임이 시작되지 않았습니다.");
-    }
-
-    @Test
     void 시작을_하지_않은_상태로_상태를_출력하면_예외가_발생한다() {
         //given
         ChessGame chessGame = new ChessGame();

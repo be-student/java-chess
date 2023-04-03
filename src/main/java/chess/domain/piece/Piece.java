@@ -39,14 +39,6 @@ public class Piece {
         return !isSameColor(color);
     }
 
-    @Override
-    public String toString() {
-        return "Piece{" +
-                "color=" + color +
-                ", moveState=" + moveState +
-                '}';
-    }
-
     public PieceType getType() {
         return moveState.getType();
     }
