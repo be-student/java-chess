@@ -10,6 +10,8 @@ import java.util.List;
 
 public class JdbcTemplate {
 
+    private static final String DB_ERROR_MESSAGE = "입력이 올바르지 않습니다.";
+
     private final ConnectionPool connectionPool;
 
     public JdbcTemplate(ConnectionPool connectionPool) {
@@ -23,10 +25,19 @@ public class JdbcTemplate {
             if (resultSet.next()) {
                 return resultSet.getInt(1);
             }
-            throw new IllegalArgumentException("입력이 올바르지 않습니다.");
+            throw new IllegalArgumentException(DB_ERROR_MESSAGE);
         } catch (SQLException ex) {
-            throw new IllegalArgumentException("입력이 올바르지 않습니다.");
+            throw new IllegalArgumentException(DB_ERROR_MESSAGE, ex);
         }
+    }
+
+    private ResultSet executeUpdate(PreparedStatement preparedStatement, Object... parameters)
+            throws SQLException {
+        for (int i = 1; i <= parameters.length; i++) {
+            preparedStatement.setObject(i, parameters[i - 1]);
+        }
+        preparedStatement.executeUpdate();
+        return preparedStatement.getGeneratedKeys();
     }
 
     public void executeUpdate(String query, Object... parameters) {
@@ -36,7 +47,7 @@ public class JdbcTemplate {
             }
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            throw new IllegalArgumentException("입력이 올바르지 않습니다.");
+            throw new IllegalArgumentException(DB_ERROR_MESSAGE, ex);
         }
     }
 
@@ -45,7 +56,7 @@ public class JdbcTemplate {
                 ResultSet resultSet = executeQuery(preparedStatement, parameters)) {
             return rowMapper.mapRow(resultSet);
         } catch (SQLException e) {
-            throw new IllegalArgumentException("입력이 올바르지 않습니다.");
+            throw new IllegalArgumentException(DB_ERROR_MESSAGE, e);
         }
     }
 
@@ -58,17 +69,8 @@ public class JdbcTemplate {
             }
             return results;
         } catch (SQLException e) {
-            throw new IllegalArgumentException("입력이 올바르지 않습니다.");
+            throw new IllegalArgumentException(DB_ERROR_MESSAGE, e);
         }
-    }
-
-    private ResultSet executeUpdate(PreparedStatement preparedStatement, Object... parameters)
-            throws SQLException {
-        for (int i = 1; i <= parameters.length; i++) {
-            preparedStatement.setObject(i, parameters[i - 1]);
-        }
-        preparedStatement.executeUpdate();
-        return preparedStatement.getGeneratedKeys();
     }
 
     private ResultSet executeQuery(PreparedStatement preparedStatement, Object... parameters) throws SQLException {
