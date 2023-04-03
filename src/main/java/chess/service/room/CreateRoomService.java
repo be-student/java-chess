@@ -1,6 +1,6 @@
 package chess.service.room;
 
-import chess.repository.chess.ChessGameRepository;
+import chess.service.repository.ChessGameRepository;
 
 public class CreateRoomService {
 

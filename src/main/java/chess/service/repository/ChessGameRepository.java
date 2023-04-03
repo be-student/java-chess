@@ -1,4 +1,4 @@
-package chess.repository.chess;
+package chess.service.repository;
 
 import chess.domain.game.ChessGame;
 import chess.domain.game.state.GameState;

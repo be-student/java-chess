@@ -1,5 +1,6 @@
-package chess.repository.user;
+package chess.service.repository;
 
+import chess.repository.user.UserDto;
 import java.util.Optional;
 
 public interface UserRepository {

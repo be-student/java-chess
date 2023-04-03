@@ -1,6 +1,6 @@
 package chess.service.game;
 
-import chess.repository.chess.ChessGameRepository;
+import chess.service.repository.ChessGameRepository;
 import java.util.List;
 
 public class GamesService {

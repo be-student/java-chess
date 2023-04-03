@@ -1,5 +1,6 @@
 package chess.repository.user;
 
+import chess.service.repository.UserRepository;
 import java.util.Optional;
 
 public class UserRepositoryImpl implements UserRepository {

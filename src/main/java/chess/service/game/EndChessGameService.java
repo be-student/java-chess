@@ -5,7 +5,7 @@ import chess.domain.game.ChessGame;
 import chess.domain.game.command.Command;
 import chess.domain.game.command.EndCommand;
 import chess.domain.game.state.EndState;
-import chess.repository.chess.ChessGameRepository;
+import chess.service.repository.ChessGameRepository;
 import java.util.Optional;
 
 public class EndChessGameService {

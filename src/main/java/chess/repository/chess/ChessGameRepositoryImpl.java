@@ -6,6 +6,7 @@ import chess.domain.game.state.EndState;
 import chess.domain.game.state.GameState;
 import chess.domain.game.state.MovingState;
 import chess.domain.game.state.StartState;
+import chess.service.repository.ChessGameRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

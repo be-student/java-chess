@@ -4,7 +4,7 @@ import chess.controller.exception.BoardNotFoundException;
 import chess.domain.game.ChessGame;
 import chess.domain.game.command.Command;
 import chess.domain.game.command.StartCommand;
-import chess.repository.chess.ChessGameRepository;
+import chess.service.repository.ChessGameRepository;
 import java.util.Optional;
 
 public class StartChessGameService {

@@ -3,7 +3,6 @@ package chess.service;
 import chess.mysql.ConnectionPoolImpl;
 import chess.mysql.JdbcTemplate;
 import chess.repository.chess.ChessGameDao;
-import chess.repository.chess.ChessGameRepository;
 import chess.repository.chess.ChessGameRepositoryImpl;
 import chess.repository.chess.MoveDao;
 import chess.repository.user.UserDao;
@@ -14,6 +13,7 @@ import chess.service.game.LoadChessGameService;
 import chess.service.game.MoveChessGameService;
 import chess.service.game.StartChessGameService;
 import chess.service.game.StatusChessGameService;
+import chess.service.repository.ChessGameRepository;
 import chess.service.room.CreateRoomService;
 import chess.service.user.LoginService;
 
