@@ -4,6 +4,7 @@ import chess.controller.Controller;
 import chess.controller.ErrorOutput;
 import chess.controller.Filter;
 import chess.view.InputView;
+import chess.view.response.ErrorMessageConverter;
 import java.util.List;
 
 public class MainController {
@@ -36,7 +37,7 @@ public class MainController {
                 Controller controller = commandMapper.getController(request.getActionType());
                 controller.run(request);
             } catch (Exception e) {
-                errorOutput.printError(e.getMessage());
+                errorOutput.printError(ErrorMessageConverter.convert(e.getMessage()));
             }
         }
     }
