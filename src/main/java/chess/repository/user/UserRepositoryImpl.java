@@ -11,9 +11,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public int saveIfNotExist(String userName) {
-        Optional<UserDto> user = userDao.findUserIdIfExist(userName);
-        return user.map(UserDto::getUserId)
-                .orElseGet(() -> userDao.save(userName));
+    public Optional<UserDto> findByUserName(String userName) {
+        return userDao.findById(userName);
+    }
+
+    @Override
+    public int saveUser(String userName) {
+        return userDao.save(userName);
     }
 }

@@ -34,7 +34,7 @@ class ChessGameDaoTest {
         userDao.deleteByUserName("ChessGameDaoTest");
         userDao.save("ChessGameDaoTest");
 
-        Optional<UserDto> userDto = userDao.findUserIdIfExist("ChessGameDaoTest");
+        Optional<UserDto> userDto = userDao.findById("ChessGameDaoTest");
         if (userDto.isEmpty()) {
             throw new IllegalArgumentException("사용자가 존재하지 않습니다.");
         }
