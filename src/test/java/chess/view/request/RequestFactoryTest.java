@@ -33,7 +33,7 @@ class RequestFactoryTest {
     void 빈_데이터가_필요로하는_경우(ActionType actionType, String command) {
         //given
         //when
-        var data = RequestFactory.map(List.of(command), actionType);
+        var data = RequestFactory.createData(List.of(command), actionType);
 
         //then
         assertThat(data.get(EmptyRequest.class)).isExactlyInstanceOf(EmptyRequestImpl.class);
@@ -44,7 +44,7 @@ class RequestFactoryTest {
     void 빈_데이터가_필요하지_않은_경우(ActionType actionType, Class<?> type, List<String> commands) {
         //given
         //when
-        var data = RequestFactory.map(commands, actionType);
+        var data = RequestFactory.createData(commands, actionType);
 
         //then
         assertThat(data.get(type)).isNotNull();

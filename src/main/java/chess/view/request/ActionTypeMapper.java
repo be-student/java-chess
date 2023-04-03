@@ -1,6 +1,7 @@
 package chess.view.request;
 
 import chess.controller.main.ActionType;
+import java.util.Arrays;
 
 public enum ActionTypeMapper {
     START(ActionType.START, "start"),
@@ -20,12 +21,11 @@ public enum ActionTypeMapper {
         this.action = action;
     }
 
-    public static ActionType map(String action) {
-        for (ActionTypeMapper actionTypeMapper : ActionTypeMapper.values()) {
-            if (actionTypeMapper.action.equalsIgnoreCase(action)) {
-                return actionTypeMapper.actionType;
-            }
-        }
-        throw new IllegalArgumentException("잘못된 요청입니다.");
+    public static ActionType getActionType(String action) {
+        return Arrays.stream(values())
+                .filter(actionTypeMapper -> actionTypeMapper.action.equalsIgnoreCase(action))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 요청입니다."))
+                .actionType;
     }
 }

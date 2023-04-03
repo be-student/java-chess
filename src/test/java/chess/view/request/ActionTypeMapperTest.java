@@ -17,7 +17,7 @@ class ActionTypeMapperTest {
     void 커맨드의_시작_값에_따라_액션_타입이_잘_반환됨(ActionType expected, String command) {
         //given
         //when
-        ActionType actual = ActionTypeMapper.map(command);
+        ActionType actual = ActionTypeMapper.getActionType(command);
 
         //then
         assertEquals(expected, actual);

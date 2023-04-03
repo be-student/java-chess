@@ -33,7 +33,7 @@ public enum RequestFactory {
         this.requestData = requestData;
     }
 
-    public static <T extends RequestData, R extends T> Map<Class<T>, R> map(List<String> commands,
+    public static <T extends RequestData, R extends T> Map<Class<T>, R> createData(List<String> commands,
             ActionType actionType) {
         RequestFactory requestFactory = findRequestFactory(actionType);
         @SuppressWarnings("unchecked")
