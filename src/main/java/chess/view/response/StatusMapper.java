@@ -1,6 +1,7 @@
 package chess.view.response;
 
 import chess.domain.game.state.StatusType;
+import java.util.Arrays;
 
 public enum StatusMapper {
     START("ready", StatusType.START),
@@ -16,11 +17,10 @@ public enum StatusMapper {
     }
 
     public static String map(StatusType statusType) {
-        for (StatusMapper statusMapper : values()) {
-            if (statusMapper.statusType == statusType) {
-                return statusMapper.status;
-            }
-        }
-        throw new IllegalArgumentException("잘못된 status 입니다.");
+        return Arrays.stream(values())
+                .filter(statusMapper -> statusMapper.statusType == statusType)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 status 입니다."))
+                .status;
     }
 }
