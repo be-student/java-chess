@@ -1,14 +1,14 @@
 package chess.service.user;
 
 import chess.repository.user.UserDto;
-import chess.repository.user.UserRepositoryImpl;
+import chess.service.repository.UserRepository;
 import java.util.Optional;
 
 public class LoginService {
 
-    private final UserRepositoryImpl userRepository;
+    private final UserRepository userRepository;
 
-    public LoginService(UserRepositoryImpl userRepository) {
+    public LoginService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
