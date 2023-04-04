@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-public enum RequestFactory {
+public enum RequestDataFactory {
     START(ActionType.START, EmptyRequest.class, EmptyRequestImpl::new),
     END(ActionType.END, EmptyRequest.class, EmptyRequestImpl::new),
     MOVE(ActionType.MOVE, MoveRequest.class, MoveRequestImpl::new),
@@ -25,7 +25,7 @@ public enum RequestFactory {
     private final Class<? extends RequestData> requestType;
     private final Function<List<String>, ? extends RequestData> requestData;
 
-    <T extends RequestData, R extends T> RequestFactory(ActionType actionType,
+    <T extends RequestData, R extends T> RequestDataFactory(ActionType actionType,
             Class<T> requestType,
             Function<List<String>, R> requestData) {
         this.actionType = actionType;
@@ -35,18 +35,18 @@ public enum RequestFactory {
 
     public static <T extends RequestData, R extends T> Map<Class<T>, R> createData(List<String> commands,
             ActionType actionType) {
-        RequestFactory requestFactory = findRequestFactory(actionType);
+        RequestDataFactory requestDataFactory = findRequestFactory(actionType);
         @SuppressWarnings("unchecked")
         Map<Class<T>, R> map = Map.of(
-                (Class<T>) requestFactory.requestType,
-                (R) requestFactory.requestData.apply(commands)
+                (Class<T>) requestDataFactory.requestType,
+                (R) requestDataFactory.requestData.apply(commands)
         );
         return map;
     }
 
-    private static RequestFactory findRequestFactory(ActionType actionType) {
+    private static RequestDataFactory findRequestFactory(ActionType actionType) {
         return Arrays.stream(values())
-                .filter(requestFactory -> requestFactory.actionType == actionType)
+                .filter(requestDataFactory -> requestDataFactory.actionType == actionType)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 ActionType이 없습니다."));
     }

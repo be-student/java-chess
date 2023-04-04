@@ -4,7 +4,7 @@ import chess.domain.game.state.StatusType;
 import java.util.Arrays;
 
 public enum StatusMapper {
-    START("ready", StatusType.START),
+    START("ready", StatusType.READY),
     PLAYING("playing", StatusType.PLAYING),
     END("end", StatusType.END);
 

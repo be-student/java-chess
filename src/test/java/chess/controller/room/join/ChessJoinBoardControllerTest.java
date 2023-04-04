@@ -35,7 +35,7 @@ class ChessJoinBoardControllerTest {
         assertAll(
                 () -> assertThat(joinBoardSpy.getBoardId()).isEqualTo(boardId),
                 () -> assertThat(joinBoardOutputSpy.getCount()).isOne(),
-                () -> assertThat(joinBoardOutputSpy.getStatusType()).isEqualTo(StatusType.START)
+                () -> assertThat(joinBoardOutputSpy.getStatusType()).isEqualTo(StatusType.READY)
         );
     }
 

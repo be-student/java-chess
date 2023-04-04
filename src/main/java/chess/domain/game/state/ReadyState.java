@@ -4,7 +4,7 @@ import chess.domain.game.exception.ChessGameException;
 
 public class ReadyState implements GameState {
 
-    private static final StatusType STATUS_TYPE = StatusType.START;
+    private static final StatusType STATUS_TYPE = StatusType.READY;
     private static final ReadyState INSTANCE = new ReadyState();
 
     private ReadyState() {

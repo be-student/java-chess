@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 class StatusMapperTest {
 
     @ParameterizedTest
-    @CsvSource({"PLAYING, playing", "END, end", "START, ready"})
+    @CsvSource({"PLAYING, playing", "END, end", "READY, ready"})
     void 상태에_따른_결과_가져오기_테스트(StatusType statusType, String expected) {
         // given
         // when

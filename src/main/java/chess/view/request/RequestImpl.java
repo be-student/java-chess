@@ -31,7 +31,7 @@ public class RequestImpl<R extends RequestData> implements Request {
             Optional<Integer> userId,
             Optional<Integer> boardId) {
         ActionType actionType = ActionTypeMapper.getActionType(commands.get(ACTION_TYPE_INDEX));
-        Map<Class<T>, T> data = RequestFactory.createData(commands, actionType);
+        Map<Class<T>, T> data = RequestDataFactory.createData(commands, actionType);
         return new RequestImpl<>(actionType, data, userId, boardId);
     }
 
