@@ -7,7 +7,6 @@ import chess.domain.game.state.GameState;
 import chess.domain.game.state.PlayingState;
 import chess.domain.game.state.ReadyState;
 import chess.service.ChessGameRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,7 +42,7 @@ public class ChessGameRepositoryImpl implements ChessGameRepository {
             return Optional.empty();
         }
         List<MoveDto> movesByBoardId = moveDao.findMovesByBoardId(boardId);
-        List<List<Position>> movesWithPosition = convertToPosition(movesByBoardId);
+        List<List<Position>> movesWithPosition = convertToPositions(movesByBoardId);
         return Optional.of(new ChessGame(movesWithPosition, gameState.get()));
     }
 
@@ -68,15 +67,14 @@ public class ChessGameRepositoryImpl implements ChessGameRepository {
         }
     }
 
-    private List<List<Position>> convertToPosition(List<MoveDto> moves) {
+    private List<List<Position>> convertToPositions(List<MoveDto> moves) {
         return moves.stream()
-                .map(move -> {
-                    List<Position> moveWithPosition = new ArrayList<>();
-                    moveWithPosition.add(move.getOrigin());
-                    moveWithPosition.add(move.getDestination());
-                    return moveWithPosition;
-                })
+                .map(this::convertToPosition)
                 .collect(Collectors.toList());
+    }
+
+    private List<Position> convertToPosition(MoveDto move) {
+        return List.of(move.getOrigin(), move.getDestination());
     }
 
     @Override
