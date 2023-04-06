@@ -17,7 +17,7 @@ public class UserDao {
         return jdbcTemplate.save(query, userName);
     }
 
-    public Optional<UserDto> findUserIdIfExist(String userName) {
+    public Optional<UserDto> findById(String userName) {
         String query = "SELECT * FROM user WHERE user_name = ?";
         return jdbcTemplate.query(query, userIdMapper(), userName);
     }

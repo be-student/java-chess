@@ -3,7 +3,6 @@ package chess.repository.chess;
 import chess.domain.game.state.GameState;
 import chess.mysql.JdbcTemplate;
 import chess.mysql.RowMapper;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,17 +21,11 @@ public class ChessGameDao {
 
     public List<Integer> findBoardIdsByUserId(int userId) {
         String query = "SELECT id FROM board WHERE user_id = ?";
-        return jdbcTemplate.query(query, boardIdsMapper(), userId);
+        return jdbcTemplate.queryResults(query, boardId(), userId);
     }
 
-    private RowMapper<List<Integer>> boardIdsMapper() {
-        return resultSet -> {
-            List<Integer> boardIds = new ArrayList<>();
-            while (resultSet.next()) {
-                boardIds.add(resultSet.getInt("id"));
-            }
-            return boardIds;
-        };
+    private RowMapper<Integer> boardId() {
+        return resultSet -> resultSet.getInt("id");
     }
 
     public void delete(int boardId) {

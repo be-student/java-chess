@@ -18,7 +18,7 @@ public class LoginController implements Controller {
 
     @Override
     public void run(Request request) {
-        LoginRequest loginRequest = LoginRequest.from(request);
+        LoginRequest loginRequest = request.getData(LoginRequest.class);
         int userId = loginService.login(loginRequest.getUserName());
         login.login(userId);
         loginOutput.printLoginSuccess();

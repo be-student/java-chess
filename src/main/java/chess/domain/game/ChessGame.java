@@ -2,8 +2,8 @@ package chess.domain.game;
 
 import chess.domain.game.exception.ChessGameException;
 import chess.domain.game.state.GameState;
-import chess.domain.game.state.MovingState;
-import chess.domain.game.state.StartState;
+import chess.domain.game.state.PlayingState;
+import chess.domain.game.state.ReadyState;
 import chess.domain.game.state.StatusType;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
@@ -13,15 +13,16 @@ import java.util.Map;
 
 public class ChessGame {
 
-    private Board board;
+    private final Board board;
     private GameState gameState;
 
     public ChessGame() {
-        gameState = StartState.getInstance();
+        gameState = ReadyState.getInstance();
+        board = new Board();
     }
 
     public ChessGame(List<List<Position>> moves, GameState gameState) {
-        this.gameState = MovingState.getInstance();
+        this.gameState = PlayingState.getInstance();
         board = new Board();
         moves.forEach(move -> move(move.get(0), move.get(1)));
         this.gameState = gameState;
@@ -29,7 +30,6 @@ public class ChessGame {
 
     public void start() {
         gameState = gameState.start();
-        board = new Board();
     }
 
     public void move(Position origin, Position destination) {
@@ -49,9 +49,6 @@ public class ChessGame {
     }
 
     public List<List<Piece>> getPieces() {
-        if (gameState.notStarted()) {
-            throw new ChessGameException("게임이 시작되지 않았습니다.");
-        }
         return board.getPieces();
     }
 
