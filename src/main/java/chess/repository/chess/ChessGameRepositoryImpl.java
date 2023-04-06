@@ -28,22 +28,18 @@ public class ChessGameRepositoryImpl implements ChessGameRepository {
 
     @Override
     public Optional<ChessGame> findById(int id) {
-        return loadChessGame(id);
+        Optional<GameState> gameState = loadGameState(id);
+        if (gameState.isEmpty()) {
+            return Optional.empty();
+        }
+        List<MoveDto> movesByBoardId = moveDao.findMovesByBoardId(id);
+        List<List<Position>> movesWithPosition = convertToPositions(movesByBoardId);
+        return Optional.of(new ChessGame(movesWithPosition, gameState.get()));
     }
 
     @Override
     public List<Integer> findAllIdsByUserId(int userId) {
         return chessGameDao.findBoardIdsByUserId(userId);
-    }
-
-    private Optional<ChessGame> loadChessGame(int boardId) {
-        Optional<GameState> gameState = loadGameState(boardId);
-        if (gameState.isEmpty()) {
-            return Optional.empty();
-        }
-        List<MoveDto> movesByBoardId = moveDao.findMovesByBoardId(boardId);
-        List<List<Position>> movesWithPosition = convertToPositions(movesByBoardId);
-        return Optional.of(new ChessGame(movesWithPosition, gameState.get()));
     }
 
     private Optional<GameState> loadGameState(int boardId) {
